@@ -1,0 +1,62 @@
+﻿@page "/AllStaff"
+@using BlazorApp2.Modles;
+
+
+@inject BlazorApp2.RepositoriesPattern.Interfaces.IStaff _Staff
+
+div style="padding:20px;margin:20px;border:solid;border-color:lightblue;border-radius">
+
+<MudSimpleTable Style="overflow-x: auto;">
+    <thead>
+        <tr>
+            <th> Name</th>
+            <th>Date Of Birth</th>
+            <th> Phone Numbere</th>
+            <th>Department</th>
+            <th> Postion</th>
+            <th> Salary</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ListOfStaff )
+        {
+            <tr>
+                <td>@item.EmpName</td>
+                <td>@item.DateOfBirth</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.Department</td>
+                <td>@item.Position</td>
+                <td>@item.Salary</td>
+
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+
+
+@code {
+    public List<StaffModle> ListOfStaff { get; set; } = new List<StaffModle>();
+
+
+    protected override async Task OnInitializedAsync()
+
+    {
+
+        ListOfStaff = await _Staff.GetAllStaff();
+
+    }
+
+
+
+
+
+    private async Task GetData()
+    {
+        ListOfStaff = await _Staff.GetAllStaff();
+        
+    }
+       
+    
+}

@@ -1,0 +1,77 @@
+﻿    
+@page "/Staff"
+@using BlazorApp2.Modles
+
+@inject BlazorApp2.RepositoriesPattern.Interfaces.IStaff staffService
+
+<h3>Please Fill The Form Below</h3>
+<br/>
+   <div style="border:solid;border-color:lightblue;padding:25px;background-color:whitesmoke;border-radius:10px;font-family:Andalus">
+    <form @onsubmit="SaveEmpInfo">
+
+        <div class="row">
+            <div class="col">
+                <label>Emp Name</label>
+                <input type="text" class="form-control" placeholder="ex.. John Doe"@bind-value="EmpInfo.EmpName" />
+            </div>
+            <div class="col">
+                <label>Date Of Birth</label>
+                <input type="date" class="form-control" @bind-value="EmpInfo.DateOfBirth"/>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col">
+                <label>Phone Number</label>
+                <input type="text" class="form-control" placeholder="ex.. + 964 78 26 550 981"@bind-value="EmpInfo.PhoneNumber" />
+            </div>
+            <div class="col">
+                <label>Emp Department</label>
+                <select class="form-control"  @bind="EmpInfo.Department"   >
+                    <option>Finance</option>
+                    <option>HR</option>
+                    <option>IT</option>
+                    <option>Adminstration</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label>Position</label>
+                <input type="text" class="form-control" placeholder="ex.. Marketing Manager"@bind-value="EmpInfo.Position" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-8">
+                <label>Emp Salary in Dollar</label>
+                <input type="number" class="form-control" placeholder="ex.. 800" @bind-value="EmpInfo.Salary"/>
+            </div>
+            <div class="col-4">
+                <button type="submit" style="margin-top:25px" class="form-control btn btn-primary">Add Emp</button>
+            </div>
+        </div>
+    </form>
+
+
+   </div>
+
+
+
+
+
+
+@code {
+
+    public StaffModle EmpInfo { get; set; } = new StaffModle();
+
+
+    private void SaveEmpInfo()
+    {
+        staffService.AddStaffMember(EmpInfo);
+    }
+    }
+
